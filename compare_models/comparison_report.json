@@ -1,0 +1,113 @@
+{
+  "models": {
+    "vljepa": {
+      "paper": "arXiv:2512.10942",
+      "paradigm": "non_generative_embedding_prediction",
+      "parameters": {
+        "x_encoder": 11389056,
+        "y_encoder": 3310592,
+        "predictor": 4967680,
+        "y_decoder": 3254528,
+        "total": 22921856,
+        "trainable": 22921856
+      },
+      "forward": {
+        "visual_tokens_shape": [
+          1,
+          393,
+          384
+        ],
+        "query_embedding_shape": [
+          1,
+          256
+        ],
+        "predicted_embedding_shape": [
+          1,
+          256
+        ],
+        "output_type": "continuous_embedding",
+        "output_dim": 256,
+        "decoder_invoked": false,
+        "forward_ms": 128.89
+      }
+    },
+    "qwen3vl": {
+      "paper": "arXiv:2511.21631",
+      "paradigm": "generative_autoregressive",
+      "parameters": {
+        "vit": 19742208,
+        "projector": 2099200,
+        "decoder": 71905280,
+        "total": 93746688,
+        "trainable": 93746688
+      },
+      "forward": {
+        "vit_tokens_shape": [
+          4,
+          257,
+          512
+        ],
+        "deepstack_layers_shape": [
+          4,
+          4,
+          257,
+          512
+        ],
+        "projected_tokens_shape": [
+          4,
+          257,
+          1024
+        ],
+        "logits_shape": [
+          1,
+          16,
+          4096
+        ],
+        "output_type": "token_logits",
+        "output_dim": 4096,
+        "decoder_invoked": true,
+        "forward_ms": 1691.85
+      }
+    }
+  },
+  "generation_benchmark": {
+    "max_new_tokens": 20,
+    "vljepa_ms": 100.26,
+    "qwen3vl_ms": 26786.09,
+    "generation_speedup": 267.17,
+    "vljepa_decoder_passes": 1,
+    "qwen3vl_decoder_passes": 20,
+    "note": "VL-JEPA decodes in one pass (embedding prediction). Qwen3-VL decodes token-by-token (autoregressive)."
+  },
+  "architecture_differences": {
+    "training_objective": {
+      "vljepa": "cosine + MSE between predicted and target embeddings",
+      "qwen3vl": "cross-entropy over next token"
+    },
+    "decoder_usage": {
+      "vljepa": "selective (invoked only on semantic change)",
+      "qwen3vl": "always (one pass per generated token)"
+    },
+    "native_tasks": {
+      "vljepa": [
+        "retrieval",
+        "classification",
+        "discriminative_vqa"
+      ],
+      "qwen3vl": [
+        "generative_vqa",
+        "grounding",
+        "ocr",
+        "instruction_following"
+      ]
+    },
+    "visual_bridge": {
+      "vljepa": "cross-attention Predictor (visual x text_query -> predicted_embedding)",
+      "qwen3vl": "MLP projector (visual_tokens -> LLM_token_space)"
+    },
+    "multi_scale_features": {
+      "vljepa": false,
+      "qwen3vl": "DeepStack (K=4 intermediate ViT layers fused into LLM layers)"
+    }
+  }
+}

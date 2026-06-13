@@ -1,0 +1,72 @@
+{
+  "config": {
+    "n_samples": 200,
+    "n_classes": 10,
+    "weights": "random (untrained)",
+    "data": "synthetic random pixels"
+  },
+  "vljepa": {
+    "model": "VL-JEPA",
+    "top1_accuracy": 0.095,
+    "top5_accuracy": 0.45,
+    "precision_macro": 0.017317976141505553,
+    "recall_macro": 0.0992822966507177,
+    "f1_macro": 0.02319001386962552,
+    "precision_micro": 0.095,
+    "recall_micro": 0.095,
+    "f1_micro": 0.095,
+    "precision_weighted": 0.017605923488276432,
+    "recall_weighted": 0.095,
+    "f1_weighted": 0.0228876560332871,
+    "f1_per_class": {
+      "stir soup": 0.0,
+      "chop vegetables": 0.0,
+      "mix batter": 0.0,
+      "roll dough": 0.17475728155339806,
+      "pour liquid": 0.0,
+      "crack eggs": 0.0,
+      "slice bread": 0.0,
+      "wash hands": 0.0,
+      "peel potato": 0.05714285714285714,
+      "grate cheese": 0.0
+    },
+    "mcc": -0.0029545085234197297,
+    "kappa": -0.0010785099969579104,
+    "roc_auc": 0.4821429618882419,
+    "mAP": 0.1182275179450724
+  },
+  "qwen3vl": {
+    "model": "Qwen3-VL",
+    "top1_accuracy": 0.07,
+    "top5_accuracy": 0.495,
+    "precision_macro": 0.007000000000000001,
+    "recall_macro": 0.1,
+    "f1_macro": 0.01308411214953271,
+    "precision_micro": 0.07,
+    "recall_micro": 0.07,
+    "f1_micro": 0.07,
+    "precision_weighted": 0.004900000000000001,
+    "recall_weighted": 0.07,
+    "f1_weighted": 0.009158878504672896,
+    "f1_per_class": {
+      "stir soup": 0.1308411214953271,
+      "chop vegetables": 0.0,
+      "mix batter": 0.0,
+      "roll dough": 0.0,
+      "pour liquid": 0.0,
+      "crack eggs": 0.0,
+      "slice bread": 0.0,
+      "wash hands": 0.0,
+      "peel potato": 0.0,
+      "grate cheese": 0.0
+    },
+    "mcc": 0.0,
+    "kappa": 0.0,
+    "roc_auc": 0.5464207234923829,
+    "mAP": 0.1499919233581248
+  },
+  "speed": {
+    "vljepa_seconds": 16.731383323669434,
+    "qwen3vl_seconds": 291.4329390525818
+  }
+}
